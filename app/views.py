@@ -15,6 +15,12 @@ def display_topics(request):
 
 def display_webpages(request):
     LWo=Webpage.objects.all()
+    #FIELD LOOKUPS
+    LWo=Webpage.objects.filter(name__startswith='l')
+    LWo=Webpage.objects.filter(name__endswith='u')
+    LWo=Webpage.objects.filter(name__in='laddu')
+    LWo=Webpage.objects.filter(name__contains='a')
+    LWo=Webpage.objects.filter(name__regex='^s')
     d={'LWO':LWo}
     return render(request,'display_webpages.html',d)
 
@@ -28,5 +34,14 @@ def display_AC(request):
     LAO=AccessRecords.objects.order_by(Length('name').desc())
     LAO=AccessRecords.objects.all()[2:3:]
     LAO=AccessRecords.objects.all()[1:4:]
+    LAO=AccessRecords.objects.all()
+    #FIELD LOOKUPS 
+    LAO=AccessRecords.objects.filter(date__gt='2022-12-9')
+    LAO=AccessRecords.objects.filter(date__gte='2022-12-9')
+    LAO=AccessRecords.objects.filter(date__lt='2022-12-13')
+    LAO=AccessRecords.objects.filter(date__lte='2022-12-13')
+    LAO=AccessRecords.objects.filter(date__month='12')
+    LAO=AccessRecords.objects.filter(date__year='2019')
+    LAO=AccessRecords.objects.filter(date__day='2')
     d={'LAO':LAO}
     return render(request,'display_AC.html',d)
