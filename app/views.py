@@ -24,6 +24,30 @@ def display_webpages(request):
     d={'LWO':LWo}
     return render(request,'display_webpages.html',d)
 
+
+def update_webpage(request):
+    LWO=Webpage.objects.all()
+    Webpage.objects.filter(topic_name='valley ball').update(name='gouse')
+    T=Topic.objects.get_or_create(topic_name='Cricket')[0]
+    T.save()
+    Webpage.objects.update_or_create(name='malli',defaults={'topic_name':T,'url':'https://malli.in'})
+    t1=Topic.objects.get_or_create(topic_name='hockey')[0]
+    t1.save()
+    Webpage.objects.update_or_create(name='harsha',defaults={'topic_name':t1,'url':'https://harsha.in'})
+
+    d={'LWO':LWO}
+    return render(request,'display_webpages.html',d)
+
+
+# def delete_webpage(request):
+#     #Webpage.objects.filter(topic_name='Cricket').delete()
+    
+#     Webpage.objects.all().delete()
+#     LWO=Webpage.objects.all()
+#     d={'LWO':LWO}
+#     return render(request,'display_webpages.html',d)
+
+
 def display_AC(request):
     LAO=AccessRecords.objects.all()
     LAO=AccessRecords.objects.filter(date='2022-12-13')
